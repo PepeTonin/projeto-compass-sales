@@ -8,6 +8,10 @@ import SuccessRouteButton from '../../components/SuccessRouteButton/SuccessRoute
 import BackRouteButton from '../../components/BackRouteButton/BackRouteButton';
 import ScreenTitle from '../../components/ScreenTitle/ScreenTitle';
 import UserInput from '../../components/UserInput/UserInput';
+import {
+  emailValidation,
+  passwordValidation,
+} from '../../util/inputValidations';
 
 type RootStackParamList = {
   Login: any;
@@ -21,6 +25,12 @@ type NavigationProps = NativeStackScreenProps<RootStackParamList>;
 export default function Login({ navigation }: NavigationProps) {
   const [enteredEmail, setEnteredEmail] = useState('');
   const [enteredPassword, setEnteredPassword] = useState('');
+
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+
+  const [isEmailEmpty, setIsEmailEmpty] = useState(true);
+  const [isPasswordEmpty, setIsPasswordEmpty] = useState(true);
 
   function loginHandler() {
     console.log('firebase auth - login');
@@ -37,10 +47,34 @@ export default function Login({ navigation }: NavigationProps) {
 
   function updateEnteredEmailHandler(enteredValue: string) {
     setEnteredEmail(enteredValue);
+
+    if (emailValidation(enteredValue)) {
+      setIsEmailValid(true);
+    } else {
+      setIsEmailValid(false);
+    }
+
+    if (enteredValue.length > 0) {
+      setIsEmailEmpty(false);
+    } else {
+      setIsEmailEmpty(true);
+    }
   }
 
   function updateEnteredPasswordHandler(enteredValue: string) {
     setEnteredPassword(enteredValue);
+
+    if (passwordValidation(enteredValue)) {
+      setIsPasswordValid(true);
+    } else {
+      setIsPasswordValid(false);
+    }
+
+    if (enteredValue.length > 0) {
+      setIsPasswordEmpty(false);
+    } else {
+      setIsPasswordEmpty(true);
+    }
   }
 
   return (
@@ -58,12 +92,16 @@ export default function Login({ navigation }: NavigationProps) {
             placeholder="Email"
             onChangeText={updateEnteredEmailHandler}
             value={enteredEmail}
+            isValid={isEmailValid}
+            isEmpty={isEmailEmpty}
           />
           <UserInput
             type="password"
             placeholder="Password"
             onChangeText={updateEnteredPasswordHandler}
             value={enteredPassword}
+            isValid={isPasswordValid}
+            isEmpty={isPasswordEmpty}
           />
         </View>
         <View style={styles.textContainer}>

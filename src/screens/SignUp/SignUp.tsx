@@ -7,6 +7,11 @@ import SuccessRouteButton from '../../components/SuccessRouteButton/SuccessRoute
 import ActionRouteButton from '../../components/ActionRouteButton/ActionRouteButton';
 import UserInput from '../../components/UserInput/UserInput';
 import ScreenTitle from '../../components/ScreenTitle/ScreenTitle';
+import {
+  nameValidation,
+  emailValidation,
+  passwordValidation,
+} from '../../util/inputValidations';
 
 type RootStackParamList = {
   Login: any;
@@ -22,6 +27,14 @@ export default function SignUp({ navigation }: NavigationProps) {
   const [enteredEmail, setEnteredEmail] = useState('');
   const [enteredPassword, setEnteredPassword] = useState('');
 
+  const [isNameValid, setIsNameValid] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+
+  const [isNameEmpty, setIsNameEmpty] = useState(true);
+  const [isEmailEmpty, setIsEmailEmpty] = useState(true);
+  const [isPasswordEmpty, setIsPasswordEmpty] = useState(true);
+
   function signUpHandler() {
     console.log('firebase auth - sign up with email');
     navigation.replace('AuthRoutes');
@@ -33,14 +46,50 @@ export default function SignUp({ navigation }: NavigationProps) {
 
   function updateEnteredNameHandler(enteredValue: string) {
     setEnteredName(enteredValue);
+
+    if (nameValidation(enteredValue)) {
+      setIsNameValid(true);
+    } else {
+      setIsNameValid(false);
+    }
+
+    if (enteredValue.length > 0) {
+      setIsNameEmpty(false);
+    } else {
+      setIsNameEmpty(true);
+    }
   }
 
   function updateEnteredEmailHandler(enteredValue: string) {
     setEnteredEmail(enteredValue);
+
+    if (emailValidation(enteredValue)) {
+      setIsEmailValid(true);
+    } else {
+      setIsEmailValid(false);
+    }
+
+    if (enteredValue.length > 0) {
+      setIsEmailEmpty(false);
+    } else {
+      setIsEmailEmpty(true);
+    }
   }
 
   function updateEnteredPasswordHandler(enteredValue: string) {
     setEnteredPassword(enteredValue);
+    
+    if (passwordValidation(enteredValue)) {
+      setIsPasswordValid(true);
+    } else {
+      setIsPasswordValid(false);
+    }
+
+    if (enteredValue.length > 0) {
+      setIsPasswordEmpty(false);
+    } else {
+      setIsPasswordEmpty(true);
+    }
   }
 
   return (
@@ -55,18 +104,24 @@ export default function SignUp({ navigation }: NavigationProps) {
             placeholder="Name"
             onChangeText={updateEnteredNameHandler}
             value={enteredName}
+            isValid={isNameValid}
+            isEmpty={isNameEmpty}
           />
           <UserInput
             type="email"
             placeholder="Email"
             onChangeText={updateEnteredEmailHandler}
             value={enteredEmail}
+            isValid={isEmailValid}
+            isEmpty={isEmailEmpty}
           />
           <UserInput
             type="password"
             placeholder="Password"
             onChangeText={updateEnteredPasswordHandler}
             value={enteredPassword}
+            isValid={isPasswordValid}
+            isEmpty={isPasswordEmpty}
           />
         </View>
         <View style={styles.textContainer}>

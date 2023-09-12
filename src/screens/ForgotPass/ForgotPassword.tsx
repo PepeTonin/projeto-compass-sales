@@ -7,6 +7,7 @@ import BackRouteButton from '../../components/BackRouteButton/BackRouteButton';
 import SuccessRouteButton from '../../components/SuccessRouteButton/SuccessRouteButton';
 import ScreenTitle from '../../components/ScreenTitle/ScreenTitle';
 import UserInput from '../../components/UserInput/UserInput';
+import { emailValidation } from '../../util/inputValidations';
 
 type RootStackParamList = {
   Login: any;
@@ -20,6 +21,10 @@ type NavigationProps = NativeStackScreenProps<RootStackParamList>;
 export default function ForgotPassword({ navigation }: NavigationProps) {
   const [enteredEmail, setEnteredEmail] = useState('');
 
+  const [isEmailValid, setIsEmailValid] = useState(false);
+
+  const [isEmailEmpty, setIsEmailEmpty] = useState(true);
+
   function sendRequestForgotPasswordHandler() {
     console.log('firebase auth - new passowrd');
   }
@@ -30,6 +35,18 @@ export default function ForgotPassword({ navigation }: NavigationProps) {
 
   function updateEnteredEmailHandler(enteredValue: string) {
     setEnteredEmail(enteredValue);
+
+    if (emailValidation(enteredValue)) {
+      setIsEmailValid(true);
+    } else {
+      setIsEmailValid(false);
+    }
+
+    if (enteredValue.length > 0) {
+      setIsEmailEmpty(false);
+    } else {
+      setIsEmailEmpty(true);
+    }
   }
 
   return (
@@ -54,6 +71,8 @@ export default function ForgotPassword({ navigation }: NavigationProps) {
             placeholder="Email"
             onChangeText={updateEnteredEmailHandler}
             value={enteredEmail}
+            isValid={isEmailValid}
+            isEmpty={isEmailEmpty}
           />
         </View>
         <View style={styles.buttonContainer}>

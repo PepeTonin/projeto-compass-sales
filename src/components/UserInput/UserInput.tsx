@@ -1,5 +1,5 @@
 import { TextInput, View } from 'react-native';
-import {} from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 import { styles } from './style';
 import { Colors } from '../../styles/GlobalColors';
@@ -9,6 +9,8 @@ interface Props {
   placeholder: string;
   onChangeText: (enteredValue: string) => void;
   value: string;
+  isValid: boolean;
+  isEmpty: boolean;
 }
 
 export default function UserInput({
@@ -16,7 +18,10 @@ export default function UserInput({
   placeholder,
   onChangeText,
   value,
+  isValid,
+  isEmpty,
 }: Props) {
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -28,6 +33,13 @@ export default function UserInput({
         secureTextEntry={type === 'password'}
         keyboardType={type === 'email' ? 'email-address' : 'default'}
       />
+      <View style={styles.iconContainer}>
+        {isEmpty ? null : isValid ? (
+          <AntDesign name="check" size={24} color={Colors.success} />
+        ) : (
+          <AntDesign name="close" size={24} color={Colors.fail} />
+        )}
+      </View>
     </View>
   );
 }

@@ -7,16 +7,21 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     elevation: 3,
     marginVertical: 4,
-    alignItems: 'flex-start',
-    justifyContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
   },
   innerText: {
     flex: 1,
+    height: '100%',
     fontFamily: 'Roboto-Medium500',
     textAlignVertical: 'center',
     textAlign: 'left',
     fontSize: 16,
     color: Colors.black,
     marginLeft: 20,
+  },
+  iconContainer: {
+    marginRight: 20,
   },
 });
