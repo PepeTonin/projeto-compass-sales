@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'Roboto-Medium500',
-    fontSize: 14,
-    marginRight: 4,
+    fontSize: 16,
+    marginRight: 8,
   },
 });

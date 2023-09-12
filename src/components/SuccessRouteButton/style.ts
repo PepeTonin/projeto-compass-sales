@@ -5,15 +5,14 @@ export const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 343,
     height: 48,
     borderRadius: 25,
     backgroundColor: Colors.primary,
-    elevation: 5,
+    elevation: 3,
   },
   innerText: {
     fontFamily: 'Roboto-Medium500',
-    color: Colors.whiteText,
-    fontSize: 14,
+    color: Colors.white,
+    fontSize: 18,
   },
 });
