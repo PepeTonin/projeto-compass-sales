@@ -1,5 +1,0 @@
-Documentação sobre o projeto: https://www.notion.so/React-Native-0998d70de0e24a27accbba7cbae8ab8b
-
-Projeto: https://ninth-throne-6b5.notion.site/Challenge-02-Week-08-RN-abbc3724085043e4ba76b78e706bb7ad
-
-Figma: https://www.figma.com/file/KuXZWUo5LS5hFimCivkRWq/Challenge-02---RN?type=design&node-id=0-1&mode=design&t=FcXC8rgkF3AOdWzk-0
