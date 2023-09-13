@@ -6,29 +6,18 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.lightBackground,
   },
-  innerContainer: {
-    margin: 20,
-  },
   backButtonContainer: {
-    marginTop: 30,
+    marginTop: 50,
+    marginLeft: 20,
     height: 20,
     alignItems: 'flex-start',
   },
   titleContainer: {
     width: '100%',
     marginTop: 30,
+    marginLeft: 20,
   },
-  inputsContainer: {
-    width: '100%',
-    marginTop: 40,
-  },
-  textContainer: {
-    width: '100%',
-    marginTop: 16,
-    alignItems: 'flex-end',
-  },
-  buttonContainer: {
-    width: '100%',
-    marginTop: 32,
+  innerContainer: {
+    margin: 20,
   },
 });
