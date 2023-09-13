@@ -11,20 +11,26 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 4,
   },
+  isInvalidInputContainer: {
+    borderWidth: 1,
+    borderColor: Colors.fail,
+  },
+  labelText: {
+    marginTop: 4,
+    fontFamily: 'Roboto-Regular400',
+    color: Colors.gray,
+    fontSize: 12,
+  },
   innerContainer: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center'
-  },
-  invalidInputContainer: {
-    borderWidth: 1,
-    borderColor: Colors.fail,
+    marginTop: 4,
   },
   innerText: {
     flex: 1,
     height: '100%',
     fontFamily: 'Roboto-Medium500',
-    textAlignVertical: 'center',
+    textAlignVertical: 'top',
     textAlign: 'left',
     fontSize: 16,
     color: Colors.black,
