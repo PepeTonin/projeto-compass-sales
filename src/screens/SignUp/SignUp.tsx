@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
@@ -35,9 +35,22 @@ export default function SignUp({ navigation }: NavigationProps) {
   const [isEmailEmpty, setIsEmailEmpty] = useState(true);
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(true);
 
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  useEffect(() => {
+    const setIsSubmittedToFalseWhenScreenRenders = navigation.addListener(
+      'focus',
+      () => {
+        setIsSubmitted(false);
+      }
+    );
+    return setIsSubmittedToFalseWhenScreenRenders;
+  }, [navigation]);
+
   function signUpHandler() {
     console.log('firebase auth - sign up with email');
-    navigation.replace('AuthRoutes');
+    setIsSubmitted(true);
+    // navigation.replace('AuthRoutes');
   }
 
   function alreadyHaveAccountHandler() {
@@ -58,6 +71,8 @@ export default function SignUp({ navigation }: NavigationProps) {
     } else {
       setIsNameEmpty(true);
     }
+
+    setIsSubmitted(false);
   }
 
   function updateEnteredEmailHandler(enteredValue: string) {
@@ -74,11 +89,13 @@ export default function SignUp({ navigation }: NavigationProps) {
     } else {
       setIsEmailEmpty(true);
     }
+
+    setIsSubmitted(false);
   }
 
   function updateEnteredPasswordHandler(enteredValue: string) {
     setEnteredPassword(enteredValue);
-    
+
     if (passwordValidation(enteredValue)) {
       setIsPasswordValid(true);
     } else {
@@ -90,6 +107,8 @@ export default function SignUp({ navigation }: NavigationProps) {
     } else {
       setIsPasswordEmpty(true);
     }
+
+    setIsSubmitted(false);
   }
 
   return (
@@ -106,6 +125,7 @@ export default function SignUp({ navigation }: NavigationProps) {
             value={enteredName}
             isValid={isNameValid}
             isEmpty={isNameEmpty}
+            isSubmitted={isSubmitted}
           />
           <UserInput
             type="email"
@@ -114,6 +134,7 @@ export default function SignUp({ navigation }: NavigationProps) {
             value={enteredEmail}
             isValid={isEmailValid}
             isEmpty={isEmailEmpty}
+            isSubmitted={isSubmitted}
           />
           <UserInput
             type="password"
@@ -122,6 +143,7 @@ export default function SignUp({ navigation }: NavigationProps) {
             value={enteredPassword}
             isValid={isPasswordValid}
             isEmpty={isPasswordEmpty}
+            isSubmitted={isSubmitted}
           />
         </View>
         <View style={styles.textContainer}>

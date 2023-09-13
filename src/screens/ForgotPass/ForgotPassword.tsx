@@ -25,8 +25,11 @@ export default function ForgotPassword({ navigation }: NavigationProps) {
 
   const [isEmailEmpty, setIsEmailEmpty] = useState(true);
 
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   function sendRequestForgotPasswordHandler() {
     console.log('firebase auth - new passowrd');
+    setIsSubmitted(true);
   }
 
   function returnScreenHandler() {
@@ -47,6 +50,8 @@ export default function ForgotPassword({ navigation }: NavigationProps) {
     } else {
       setIsEmailEmpty(true);
     }
+
+    setIsSubmitted(false);
   }
 
   return (
@@ -73,6 +78,7 @@ export default function ForgotPassword({ navigation }: NavigationProps) {
             value={enteredEmail}
             isValid={isEmailValid}
             isEmpty={isEmailEmpty}
+            isSubmitted={isSubmitted}
           />
         </View>
         <View style={styles.buttonContainer}>

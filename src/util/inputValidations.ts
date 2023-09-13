@@ -6,7 +6,7 @@ export function nameValidation(enteredName: string) {
 }
 
 export function emailValidation(enteredEmail: string) {
-  if (enteredEmail.includes('@') && enteredEmail.includes('.')) {
+  if (enteredEmail.includes('@') && enteredEmail.includes('.com')) {
     return true;
   }
   return false;

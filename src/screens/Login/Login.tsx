@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
@@ -32,9 +32,22 @@ export default function Login({ navigation }: NavigationProps) {
   const [isEmailEmpty, setIsEmailEmpty] = useState(true);
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(true);
 
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  useEffect(() => {
+    const setIsSubmittedToFalseWhenScreenRenders = navigation.addListener(
+      'focus',
+      () => {
+        setIsSubmitted(false);
+      }
+    );
+    return setIsSubmittedToFalseWhenScreenRenders;
+  }, [navigation]);
+
   function loginHandler() {
     console.log('firebase auth - login');
-    navigation.replace('AuthRoutes');
+    setIsSubmitted(true);
+    // navigation.replace('AuthRoutes');
   }
 
   function forgotPasswordHandler() {
@@ -59,6 +72,8 @@ export default function Login({ navigation }: NavigationProps) {
     } else {
       setIsEmailEmpty(true);
     }
+
+    setIsSubmitted(false);
   }
 
   function updateEnteredPasswordHandler(enteredValue: string) {
@@ -75,6 +90,8 @@ export default function Login({ navigation }: NavigationProps) {
     } else {
       setIsPasswordEmpty(true);
     }
+
+    setIsSubmitted(false);
   }
 
   return (
@@ -94,6 +111,7 @@ export default function Login({ navigation }: NavigationProps) {
             value={enteredEmail}
             isValid={isEmailValid}
             isEmpty={isEmailEmpty}
+            isSubmitted={isSubmitted}
           />
           <UserInput
             type="password"
@@ -102,6 +120,7 @@ export default function Login({ navigation }: NavigationProps) {
             value={enteredPassword}
             isValid={isPasswordValid}
             isEmpty={isPasswordEmpty}
+            isSubmitted={isSubmitted}
           />
         </View>
         <View style={styles.textContainer}>

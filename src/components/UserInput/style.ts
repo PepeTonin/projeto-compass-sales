@@ -2,14 +2,23 @@ import { StyleSheet } from 'react-native';
 import { Colors } from '../../styles/GlobalColors';
 
 export const styles = StyleSheet.create({
-  container: {
-    height: 64,
+  outerContainer: {
+    justifyContent: 'center',
+    height: 70,
     backgroundColor: Colors.white,
     elevation: 3,
-    marginVertical: 4,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    marginTop: 6,
+    paddingHorizontal: 20,
+    borderRadius: 4,
+  },
+  innerContainer: {
+    flex: 1,
     flexDirection: 'row',
+    alignItems: 'center'
+  },
+  invalidInputContainer: {
+    borderWidth: 1,
+    borderColor: Colors.fail,
   },
   innerText: {
     flex: 1,
@@ -19,9 +28,9 @@ export const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: 16,
     color: Colors.black,
-    marginLeft: 20,
   },
-  iconContainer: {
-    marginRight: 20,
+  errorMessageContainer: {
+    alignItems: 'center',
+    marginBottom: 4,
   },
 });
