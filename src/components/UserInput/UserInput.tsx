@@ -1,4 +1,4 @@
-import { TextInput, View } from 'react-native';
+import { TextInput, View, Text } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 import { styles } from './style';
@@ -25,7 +25,13 @@ export default function UserInput({
   isSubmitted,
 }: Props) {
   return (
-    <View style={[styles.outerContainer, (isSubmitted && !isValid && styles.invalidInputContainer)]}>
+    <View
+      style={[
+        styles.outerContainer,
+        isSubmitted && !isValid && styles.isInvalidInputContainer,
+      ]}
+    >
+      <Text style={styles.labelText}>{placeholder}</Text>
       <View style={styles.innerContainer}>
         <TextInput
           style={styles.innerText}
