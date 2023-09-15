@@ -8,6 +8,7 @@ import SuccessRouteButton from '../../SuccessRouteButton/SuccessRouteButton';
 import UserInput from '../../UserInput/UserInput';
 import { emailValidation } from '../../../util/inputValidations';
 import { resetPassword } from '../../../util/auth';
+import LoadingOverlay from '../../LoadingOverlay/LoadingOverlay';
 
 type RootStackParamList = {
   Login: any;
@@ -27,8 +28,11 @@ export default function ForgotPasswordForm({ navigation }: NavigationProps) {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const [isDoingRequest, setIsDoingRequest] = useState(false);
+
   async function sendRequestForgotPasswordHandler() {
     setIsSubmitted(true);
+    setIsDoingRequest(true);
     if (isEmailValid) {
       try {
         await resetPassword(enteredEmail);
@@ -40,6 +44,7 @@ export default function ForgotPasswordForm({ navigation }: NavigationProps) {
         );
       }
     }
+    setIsDoingRequest(false);
   }
 
   function updateEnteredEmailHandler(enteredValue: string) {
@@ -58,6 +63,10 @@ export default function ForgotPasswordForm({ navigation }: NavigationProps) {
     }
 
     setIsSubmitted(false);
+  }
+
+  if(isDoingRequest){
+    return <LoadingOverlay />
   }
 
   return (

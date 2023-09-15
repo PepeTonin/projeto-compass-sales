@@ -39,6 +39,8 @@ export default function SignUpForm({ navigation }: NavigationProps) {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const [isDoingRequest, setIsDoingRequest] = useState(false);
+
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
@@ -117,18 +119,21 @@ export default function SignUpForm({ navigation }: NavigationProps) {
 
   async function signUpHandler() {
     setIsSubmitted(true);
+    setIsDoingRequest(true);
     if (isNameValid && isEmailValid && isPasswordValid) {
       try {
         const { token, uid } = await createUser(enteredEmail, enteredPassword);
         await storeUserName({ name: enteredName, uid: uid });
         authContext.authenticate(token, enteredName);
       } catch (error) {
+        console.log(error)
         Alert.alert(
           'Authentication failed!',
           'Could not create user, please check your inputs or try again later.'
         );
       }
     }
+    setIsDoingRequest(false);
   }
 
   return (

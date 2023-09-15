@@ -1,16 +1,13 @@
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
+import { Text } from 'react-native';
 
 import { styles } from './style';
+import { Colors } from '../../styles/GlobalColors';
 
-interface Props {
-  message: string;
-}
-
-export default function LoadingOverlay({ message }: Props) {
+export default function LoadingOverlay() {
   return (
-    <View style={styles.rootContainer}>
-      <Text style={styles.message}>{message}</Text>
-      <ActivityIndicator size="large" />
+    <View style={styles.container}>
+      <ActivityIndicator size="large" color={Colors.primary} />
     </View>
   );
 }

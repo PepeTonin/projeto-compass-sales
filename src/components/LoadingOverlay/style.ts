@@ -1,15 +1,12 @@
 import { StyleSheet } from 'react-native';
+import { Colors } from '../../styles/GlobalColors';
 
 export const styles = StyleSheet.create({
-  rootContainer: {
+  container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 32,
-  },
-  message: {
-    fontFamily: 'Roboto-Bold700',
-    fontSize: 16,
-    marginBottom: 12,
+    marginTop: 160,
+    backgroundColor: Colors.black,
   },
 });

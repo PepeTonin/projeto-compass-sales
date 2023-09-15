@@ -13,6 +13,7 @@ import {
   emailValidation,
   passwordValidation,
 } from '../../../util/inputValidations';
+import LoadingOverlay from '../../LoadingOverlay/LoadingOverlay';
 
 type RootStackParamList = {
   Login: any;
@@ -34,6 +35,8 @@ export default function LoginForm({ navigation }: NavigationProps) {
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(true);
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const [isDoingRequest, setIsDoingRequest] = useState(false);
 
   const authContext = useContext(AuthContext);
 
@@ -93,6 +96,7 @@ export default function LoginForm({ navigation }: NavigationProps) {
 
   async function loginHandler() {
     setIsSubmitted(true);
+    setIsDoingRequest(true);
     if (isEmailValid && isPasswordValid) {
       try {
         const { token, uid } = await login(enteredEmail, enteredPassword);
@@ -105,6 +109,11 @@ export default function LoginForm({ navigation }: NavigationProps) {
         );
       }
     }
+    setIsDoingRequest(false);
+  }
+
+  if (isDoingRequest) {
+    return <LoadingOverlay />;
   }
 
   return (
