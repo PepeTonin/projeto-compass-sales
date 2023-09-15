@@ -6,15 +6,9 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.lightBackground,
   },
-  backButtonContainer: {
-    marginTop: 50,
-    marginLeft: 20,
-    height: 20,
-    alignItems: 'flex-start',
-  },
   titleContainer: {
     width: '100%',
-    marginTop: 30,
+    marginTop: 100,
     marginLeft: 20,
   },
   innerContainer: {

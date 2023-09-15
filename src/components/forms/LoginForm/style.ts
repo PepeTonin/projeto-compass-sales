@@ -1,7 +1,5 @@
 import { StyleSheet } from 'react-native';
 
-import { Colors } from '../../../styles/GlobalColors';
-
 export const styles = StyleSheet.create({
   inputsContainer: {
     width: '100%',
@@ -9,7 +7,7 @@ export const styles = StyleSheet.create({
   },
   textContainer: {
     width: '100%',
-    marginTop: 16,
+    marginTop: 14,
     alignItems: 'flex-end',
   },
   buttonContainer: {

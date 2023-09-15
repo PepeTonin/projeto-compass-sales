@@ -58,6 +58,10 @@ export default function LoginForm({ navigation }: NavigationProps) {
     navigation.navigate('ForgotPassword');
   }
 
+  function newAccountHandler() {
+    navigation.navigate('SignUp');
+  }
+
   function updateEnteredEmailHandler(enteredValue: string) {
     setEnteredEmail(enteredValue.toLowerCase());
 
@@ -139,8 +143,13 @@ export default function LoginForm({ navigation }: NavigationProps) {
         />
       </View>
       <View style={styles.textContainer}>
-        <ActionRouteButton onPress={forgotPasswordHandler}>
+        <ActionRouteButton onPress={forgotPasswordHandler} icon='arrow'>
           Forgot your password?
+        </ActionRouteButton>
+      </View>
+      <View style={styles.textContainer}>
+        <ActionRouteButton onPress={newAccountHandler} icon='new-account'>
+          Create a new account
         </ActionRouteButton>
       </View>
       <View style={styles.buttonContainer}>

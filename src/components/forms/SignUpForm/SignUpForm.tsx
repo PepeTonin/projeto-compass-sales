@@ -14,6 +14,7 @@ import {
   emailValidation,
   passwordValidation,
 } from '../../../util/inputValidations';
+import LoadingOverlay from '../../LoadingOverlay/LoadingOverlay';
 
 type RootStackParamList = {
   Login: any;
@@ -55,7 +56,7 @@ export default function SignUpForm({ navigation }: NavigationProps) {
         setEnteredPassword('');
         setIsPasswordEmpty(true);
       }
-      );
+    );
     return setIsSubmittedToFalseWhenScreenRenders;
   }, [navigation]);
 
@@ -126,7 +127,7 @@ export default function SignUpForm({ navigation }: NavigationProps) {
         await storeUserName({ name: enteredName, uid: uid });
         authContext.authenticate(token, enteredName);
       } catch (error) {
-        console.log(error)
+        console.log(error);
         Alert.alert(
           'Authentication failed!',
           'Could not create user, please check your inputs or try again later.'
@@ -134,6 +135,10 @@ export default function SignUpForm({ navigation }: NavigationProps) {
       }
     }
     setIsDoingRequest(false);
+  }
+
+  if (isDoingRequest) {
+    return <LoadingOverlay />;
   }
 
   return (
@@ -168,7 +173,7 @@ export default function SignUpForm({ navigation }: NavigationProps) {
         />
       </View>
       <View style={styles.textContainer}>
-        <ActionRouteButton onPress={alreadyHaveAccountHandler}>
+        <ActionRouteButton onPress={alreadyHaveAccountHandler} icon="arrow">
           Already have an account?
         </ActionRouteButton>
       </View>
