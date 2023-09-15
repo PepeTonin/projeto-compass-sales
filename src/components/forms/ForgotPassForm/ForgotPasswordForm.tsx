@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Alert } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { styles } from './style';
@@ -7,6 +7,7 @@ import { styles } from './style';
 import SuccessRouteButton from '../../SuccessRouteButton/SuccessRouteButton';
 import UserInput from '../../UserInput/UserInput';
 import { emailValidation } from '../../../util/inputValidations';
+import { resetPassword } from '../../../util/auth';
 
 type RootStackParamList = {
   Login: any;
@@ -26,13 +27,23 @@ export default function ForgotPasswordForm({ navigation }: NavigationProps) {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  function sendRequestForgotPasswordHandler() {
-    console.log('firebase auth - new passowrd');
+  async function sendRequestForgotPasswordHandler() {
     setIsSubmitted(true);
+    if (isEmailValid) {
+      try {
+        await resetPassword(enteredEmail);
+        navigation.navigate('Login');
+      } catch (error) {
+        Alert.alert(
+          'Reset password failed!',
+          'Could not reset the password, please check your email or try again later.'
+        );
+      }
+    }
   }
 
   function updateEnteredEmailHandler(enteredValue: string) {
-    setEnteredEmail(enteredValue);
+    setEnteredEmail(enteredValue.toLowerCase());
 
     if (emailValidation(enteredValue)) {
       setIsEmailValid(true);

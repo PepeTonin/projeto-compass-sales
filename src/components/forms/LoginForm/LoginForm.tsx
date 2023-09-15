@@ -1,11 +1,14 @@
-import { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { useState, useEffect, useContext } from 'react';
+import { Alert, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { styles } from './style';
 import ActionRouteButton from '../../ActionRouteButton/ActionRouteButton';
 import SuccessRouteButton from '../../SuccessRouteButton/SuccessRouteButton';
 import UserInput from '../../UserInput/UserInput';
+import { getUserNameByUid } from '../../../util/userData';
+import { login } from '../../../util/auth';
+import { AuthContext } from '../../../context/auth-context';
 import {
   emailValidation,
   passwordValidation,
@@ -32,28 +35,28 @@ export default function LoginForm({ navigation }: NavigationProps) {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const authContext = useContext(AuthContext);
+
   useEffect(() => {
     const setIsSubmittedToFalseWhenScreenRenders = navigation.addListener(
       'focus',
       () => {
         setIsSubmitted(false);
+        setEnteredEmail('');
+        setIsEmailEmpty(true);
+        setEnteredPassword('');
+        setIsPasswordEmpty(true);
       }
     );
     return setIsSubmittedToFalseWhenScreenRenders;
   }, [navigation]);
-
-  function loginHandler() {
-    console.log('firebase auth - login');
-    setIsSubmitted(true);
-    // navigation.replace('AuthRoutes');
-  }
 
   function forgotPasswordHandler() {
     navigation.navigate('ForgotPassword');
   }
 
   function updateEnteredEmailHandler(enteredValue: string) {
-    setEnteredEmail(enteredValue);
+    setEnteredEmail(enteredValue.toLowerCase());
 
     if (emailValidation(enteredValue)) {
       setIsEmailValid(true);
@@ -86,6 +89,22 @@ export default function LoginForm({ navigation }: NavigationProps) {
     }
 
     setIsSubmitted(false);
+  }
+
+  async function loginHandler() {
+    setIsSubmitted(true);
+    if (isEmailValid && isPasswordValid) {
+      try {
+        const { token, uid } = await login(enteredEmail, enteredPassword);
+        let name = await getUserNameByUid(uid);
+        authContext.authenticate(token, name);
+      } catch (error) {
+        Alert.alert(
+          'Authentication failed!',
+          'Could not login, please check your email and password or try again later.'
+        );
+      }
+    }
   }
 
   return (

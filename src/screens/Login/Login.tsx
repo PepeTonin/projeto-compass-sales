@@ -23,7 +23,7 @@ export default function Login({ navigation, route }: NavigationProps) {
   return (
     <View style={styles.outerContainer}>
       <View style={styles.backButtonContainer}>
-        <BackRouteButton onPress={returnScreenHandler} />
+        <BackRouteButton onPress={returnScreenHandler} text="Sign up" />
       </View>
       <View style={styles.titleContainer}>
         <ScreenTitle>Login</ScreenTitle>

@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { useState, useEffect, useContext } from 'react';
+import { Alert, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { styles } from './style';
 import SuccessRouteButton from '../../SuccessRouteButton/SuccessRouteButton';
 import ActionRouteButton from '../../ActionRouteButton/ActionRouteButton';
 import UserInput from '../../UserInput/UserInput';
-
+import { createUser } from '../../../util/auth';
+import { storeUserName } from '../../../util/userData';
+import { AuthContext } from '../../../context/auth-context';
 import {
   nameValidation,
   emailValidation,
@@ -37,21 +39,23 @@ export default function SignUpForm({ navigation }: NavigationProps) {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const authContext = useContext(AuthContext);
+
   useEffect(() => {
     const setIsSubmittedToFalseWhenScreenRenders = navigation.addListener(
       'focus',
       () => {
         setIsSubmitted(false);
+        setEnteredName('');
+        setIsNameEmpty(true);
+        setEnteredEmail('');
+        setIsEmailEmpty(true);
+        setEnteredPassword('');
+        setIsPasswordEmpty(true);
       }
-    );
+      );
     return setIsSubmittedToFalseWhenScreenRenders;
   }, [navigation]);
-
-  function signUpHandler() {
-    console.log('firebase auth - sign up with email');
-    setIsSubmitted(true);
-    // navigation.replace('AuthRoutes');
-  }
 
   function alreadyHaveAccountHandler() {
     navigation.navigate('Login');
@@ -76,7 +80,7 @@ export default function SignUpForm({ navigation }: NavigationProps) {
   }
 
   function updateEnteredEmailHandler(enteredValue: string) {
-    setEnteredEmail(enteredValue);
+    setEnteredEmail(enteredValue.toLowerCase());
 
     if (emailValidation(enteredValue)) {
       setIsEmailValid(true);
@@ -109,6 +113,22 @@ export default function SignUpForm({ navigation }: NavigationProps) {
     }
 
     setIsSubmitted(false);
+  }
+
+  async function signUpHandler() {
+    setIsSubmitted(true);
+    if (isNameValid && isEmailValid && isPasswordValid) {
+      try {
+        const { token, uid } = await createUser(enteredEmail, enteredPassword);
+        await storeUserName({ name: enteredName, uid: uid });
+        authContext.authenticate(token, enteredName);
+      } catch (error) {
+        Alert.alert(
+          'Authentication failed!',
+          'Could not create user, please check your inputs or try again later.'
+        );
+      }
+    }
   }
 
   return (
