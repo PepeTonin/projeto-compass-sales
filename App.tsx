@@ -1,9 +1,10 @@
-import { useCallback } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import AuthContextProvider from './src/context/auth-context';
 import Routes from './src/routes/Routes';
@@ -31,7 +32,7 @@ export default function App() {
   return (
     <>
       <View onLayout={onLayoutRootView} style={styles.rootAppContainer}>
-        <StatusBar style={"dark"} />
+        <StatusBar style={'dark'} />
         <AuthContextProvider>
           <NavigationContainer>
             <Routes />

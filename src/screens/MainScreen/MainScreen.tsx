@@ -22,6 +22,15 @@ export default function MainScreen({ navigation, route }: NavigationProps) {
     authContext.logout();
   }
 
+  function capitalizeName(name: string | null) {
+    if (name) {
+      let firstLetter = name[0].toUpperCase();
+      let capitalizedName = firstLetter + name.slice(1);
+      return capitalizedName;
+    }
+    return false;
+  }
+
   const image = require('../../assets/images/compass-background-image.png');
 
   return (
@@ -32,7 +41,12 @@ export default function MainScreen({ navigation, route }: NavigationProps) {
     >
       <View style={styles.rootContainer}>
         <View style={styles.headerContainer}>
-          <Text style={styles.topText}>Hello, {authContext.name}</Text>
+          <Text style={styles.topText}>
+            Hello,{' '}
+            <Text style={styles.topName}>
+              {capitalizeName(authContext.name)}
+            </Text>
+          </Text>
           <LogoutButton onPress={logoutHandler} />
         </View>
         <View style={styles.titleContainer}>

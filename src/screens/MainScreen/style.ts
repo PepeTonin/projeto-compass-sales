@@ -17,7 +17,11 @@ export const styles = StyleSheet.create({
   topText: {
     fontFamily: 'Roboto-Bold700',
     color: Colors.white,
-    fontSize:16,
+    fontSize:18,
+  },
+  topName:{
+    color: Colors.primary,
+    fontSize:20,
   },
   titleContainer: {
     marginTop: 300,
