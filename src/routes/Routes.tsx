@@ -1,16 +1,30 @@
 import { useContext, useState, useEffect } from 'react';
-import NonAuthRoutes from './routes/NonAuthRoutes';
-import AuthRoutes from './routes/AuthRoutes';
-import { AuthContext } from '../context/auth-context';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StatusBar, StatusBarStyle } from 'expo-status-bar';
+
+import { AuthContext } from '../context/auth-context';
+import AuthRoutes from './routes/AuthRoutes';
+import NonAuthRoutes from './routes/NonAuthRoutes';
 import LoadingOverlay from '../components/LoadingOverlay/LoadingOverlay';
+import { StatusBarContext } from '../context/status-bar-color-context';
 
 export default function Routes() {
-  const authContext = useContext(AuthContext);
+  const statusBarStyleContext = useContext(StatusBarContext);
+  const [statusBarStyle, setStatusBarStyle] = useState<StatusBarStyle>('dark');
 
+  const authContext = useContext(AuthContext);
   const [isTryingToLogin, setIsTryingToLogin] = useState(true);
-  
+
+  useEffect(() => {
+    if (statusBarStyleContext.style === 'light') {
+      setStatusBarStyle(() => 'light');
+    }
+
+    if (statusBarStyleContext.style === 'dark') {
+      setStatusBarStyle(() => 'dark');
+    }
+  }, [statusBarStyleContext.style]);
+
   useEffect(() => {
     async function fetchToken() {
       const storedToken = await AsyncStorage.getItem('authToken');
@@ -22,13 +36,14 @@ export default function Routes() {
     }
     fetchToken();
   }, []);
-    
+
   if (isTryingToLogin) {
-    <LoadingOverlay />
+    <LoadingOverlay />;
   }
 
   return (
     <>
+      <StatusBar style={statusBarStyle} />
       {!authContext.isAuthenticated && <NonAuthRoutes />}
       {authContext.isAuthenticated && <AuthRoutes />}
     </>

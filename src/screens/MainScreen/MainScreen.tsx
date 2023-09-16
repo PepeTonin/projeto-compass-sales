@@ -1,22 +1,18 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Text, View, ImageBackground } from 'react-native';
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { styles } from './style';
 import { AuthContext } from '../../context/auth-context';
 import LogoutButton from '../../components/LogoutButton/LogoutButton';
+import { StatusBarContext } from '../../context/status-bar-color-context';
 
-type RootStackParamList = {
-  Login: any;
-  SignUp: any;
-  ForgotPassword: any;
-  AuthRoutes: any;
-};
-
-type NavigationProps = NativeStackScreenProps<RootStackParamList>;
-
-export default function MainScreen({ navigation, route }: NavigationProps) {
+export default function MainScreen() {
   const authContext = useContext(AuthContext);
+  const statusBarStyleContext = useContext(StatusBarContext);
+
+  useEffect(() => {
+    statusBarStyleContext.setStatusBarLight();
+  }, []);
 
   function logoutHandler() {
     authContext.logout();

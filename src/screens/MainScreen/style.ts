@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
-    marginTop: 100,
+    marginTop: 80,
     marginHorizontal: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     fontSize:20,
   },
   titleContainer: {
-    marginTop: 300,
+    marginTop: 320,
     marginHorizontal: 20,
   },
   titleText: {
