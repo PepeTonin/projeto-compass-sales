@@ -46,7 +46,7 @@ export default function MainScreen() {
           <LogoutButton onPress={logoutHandler} />
         </View>
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>Compass sale</Text>
+          <Text style={styles.titleText}>Compass sales</Text>
         </View>
       </View>
     </ImageBackground>
