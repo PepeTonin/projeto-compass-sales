@@ -1,5 +1,4 @@
-import { PropsWithChildren } from 'react';
-import { createContext, useState } from 'react';
+import { PropsWithChildren, createContext, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface AuthContextType {
@@ -7,7 +6,10 @@ interface AuthContextType {
   token: string | null;
   isAuthenticated: boolean;
   authenticate: (token: string, name: string) => void;
-  authenticateWithAsyncStorage: (token: string | null, name: string | null) => void;
+  authenticateWithAsyncStorage: (
+    token: string | null,
+    name: string | null
+  ) => void;
   logout: () => void;
 }
 
@@ -24,7 +26,10 @@ export default function AuthContextProvider({ children }: PropsWithChildren) {
     await AsyncStorage.setItem('authName', name);
   }
 
-  function authenticateWithAsyncStorage(token: string | null, name: string | null) {
+  function authenticateWithAsyncStorage(
+    token: string | null,
+    name: string | null
+  ) {
     setAuthToken(token);
     setAuthName(name);
   }

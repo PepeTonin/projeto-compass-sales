@@ -14,8 +14,10 @@ export async function storeUserName(userData: userDataType) {
 }
 
 export async function getUserNameByUid(targetUid: string) {
-  const response = await axios.get(`${BACKEND_URL}/user-data/${targetUid}.json`);
-  for(let key in response.data){
+  const response = await axios.get(
+    `${BACKEND_URL}/user-data/${targetUid}.json`
+  );
+  for (let key in response.data) {
     const name = response.data[key].name;
     return name;
   }

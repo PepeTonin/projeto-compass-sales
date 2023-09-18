@@ -1,5 +1,6 @@
 import { Text, Pressable } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+
 import { styles } from './style';
 import { Colors } from '../../styles/GlobalColors';
 

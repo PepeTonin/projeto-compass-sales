@@ -35,3 +35,32 @@ npx expo start
 5. In the terminal, you will see a QR code. Just scan it with the "Expo Go" app, and the project will run on your device.
 
 ### About the App
+The application was developed using [Expo](https://docs.expo.dev/). Other libraries and tools that were used to construct this project are:
+* From the Expo workflow:
+  - [Expo Font](https://docs.expo.dev/versions/latest/sdk/font/)
+  - [Expo SplashScreen](https://docs.expo.dev/versions/latest/sdk/splash-screen/)
+  - [Expo StatusBar](https://docs.expo.dev/versions/latest/sdk/status-bar/)
+  - [Expo Vector Icons](https://docs.expo.dev/guides/icons/)
+* [React Navigation](https://reactnavigation.org/);
+* [React Native Async Storage](https://react-native-async-storage.github.io/async-storage/docs/install/);
+* [Axios](https://axios-http.com/);
+* [Firebase](https://firebase.google.com/docs);
+
+For now, the application only has an authentication area where the user can create an account, log in with an existing account, or recover a forgotten password for an existing account.
+The authentication is managed by [Firebase Auth REST API](https://firebase.google.com/docs/reference/rest/auth).
+All the screens of the project are listed below.
+
+Sign up
+![](./images/readme_file/signup_screen.jpg)
+
+Login
+![](./images/readme_file/login_screen.jpg)
+
+Forgot password
+![](./images/readme_file/forgotpass_screen.jpg)
+
+Main screen (first page the user see when login)
+![](./images/readme_file/main_screen.jpg)
+
+
+

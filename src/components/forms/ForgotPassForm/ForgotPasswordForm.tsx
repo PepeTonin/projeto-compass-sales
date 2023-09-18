@@ -3,12 +3,11 @@ import { Text, View, Alert } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { styles } from './style';
-
 import SuccessRouteButton from '../../SuccessRouteButton/SuccessRouteButton';
 import UserInput from '../../UserInput/UserInput';
-import { emailValidation } from '../../../util/inputValidations';
 import { resetPassword } from '../../../util/auth';
 import LoadingOverlay from '../../LoadingOverlay/LoadingOverlay';
+import { emailValidation } from '../../../util/inputValidations';
 
 type RootStackParamList = {
   Login: any;
@@ -65,8 +64,8 @@ export default function ForgotPasswordForm({ navigation }: NavigationProps) {
     setIsSubmitted(false);
   }
 
-  if(isDoingRequest){
-    return <LoadingOverlay />
+  if (isDoingRequest) {
+    return <LoadingOverlay />;
   }
 
   return (

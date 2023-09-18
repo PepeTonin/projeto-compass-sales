@@ -9,11 +9,11 @@ import UserInput from '../../UserInput/UserInput';
 import { getUserNameByUid } from '../../../util/userData';
 import { login } from '../../../util/auth';
 import { AuthContext } from '../../../context/auth-context';
+import LoadingOverlay from '../../LoadingOverlay/LoadingOverlay';
 import {
   emailValidation,
   passwordValidation,
 } from '../../../util/inputValidations';
-import LoadingOverlay from '../../LoadingOverlay/LoadingOverlay';
 
 type RootStackParamList = {
   Login: any;
@@ -143,12 +143,12 @@ export default function LoginForm({ navigation }: NavigationProps) {
         />
       </View>
       <View style={styles.textContainer}>
-        <ActionRouteButton onPress={forgotPasswordHandler} icon='arrow'>
+        <ActionRouteButton onPress={forgotPasswordHandler} icon="arrow">
           Forgot your password?
         </ActionRouteButton>
       </View>
       <View style={styles.textContainer}>
-        <ActionRouteButton onPress={newAccountHandler} icon='new-account'>
+        <ActionRouteButton onPress={newAccountHandler} icon="new-account">
           Create a new account
         </ActionRouteButton>
       </View>

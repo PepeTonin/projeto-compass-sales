@@ -9,12 +9,12 @@ import UserInput from '../../UserInput/UserInput';
 import { createUser } from '../../../util/auth';
 import { storeUserName } from '../../../util/userData';
 import { AuthContext } from '../../../context/auth-context';
+import LoadingOverlay from '../../LoadingOverlay/LoadingOverlay';
 import {
   nameValidation,
   emailValidation,
   passwordValidation,
 } from '../../../util/inputValidations';
-import LoadingOverlay from '../../LoadingOverlay/LoadingOverlay';
 
 type RootStackParamList = {
   Login: any;
