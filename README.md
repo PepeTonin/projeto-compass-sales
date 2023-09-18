@@ -22,12 +22,14 @@ git clone https://github.com/PepeTonin/projeto-compass_sales-pedro-henrique-de-a
 3. After that, you have to run `npm install` in the folder where you downloaded or cloned the project. This may take a while.
 
 **To run in an emulator**
+
 4. When the installation finishes, you can run the command below, with the emulator open, to start the app in it:
 ```bash
 npx expo start --android
 ```
 
 **To run on a real Android device**
+
 4. When the installation finishes, you can run the command below:
 ```bash
 npx expo start
@@ -51,15 +53,19 @@ The authentication is managed by [Firebase Auth REST API](https://firebase.googl
 All the screens of the project are listed below.
 
 Sign up
+
 ![](./images/readme_file/signup_screen.jpg)
 
 Login
+
 ![](./images/readme_file/login_screen.jpg)
 
 Forgot password
+
 ![](./images/readme_file/forgotpass_screen.jpg)
 
 Main screen (first page the user see when login)
+
 ![](./images/readme_file/main_screen.jpg)
 
 
