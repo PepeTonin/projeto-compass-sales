@@ -13,7 +13,7 @@ export default function Routes() {
   const [statusBarStyle, setStatusBarStyle] = useState<StatusBarStyle>('dark');
 
   const authContext = useContext(AuthContext);
-  const [isTryingToLogin, setIsTryingToLogin] = useState(true);
+  const [isNotTryingToLogin, setIsNotTryingToLogin] = useState(false);
 
   useEffect(() => {
     if (statusBarStyleContext.style === 'light') {
@@ -32,20 +32,20 @@ export default function Routes() {
       if (storedToken) {
         authContext.authenticateWithAsyncStorage(storedToken, storedName);
       }
-      setIsTryingToLogin(false);
+      setIsNotTryingToLogin(true);
     }
     fetchToken();
   }, []);
 
-  if (isTryingToLogin) {
-    <LoadingOverlay />;
+  if (isNotTryingToLogin) {
+    return (
+      <>
+        <StatusBar style={statusBarStyle} />
+        {!authContext.isAuthenticated && <NonAuthRoutes />}
+        {authContext.isAuthenticated && <AuthRoutes />}
+      </>
+    );
   }
 
-  return (
-    <>
-      <StatusBar style={statusBarStyle} />
-      {!authContext.isAuthenticated && <NonAuthRoutes />}
-      {authContext.isAuthenticated && <AuthRoutes />}
-    </>
-  );
+  return <LoadingOverlay />;
 }
