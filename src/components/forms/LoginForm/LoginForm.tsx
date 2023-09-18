@@ -47,8 +47,10 @@ export default function LoginForm({ navigation }: NavigationProps) {
         setIsSubmitted(false);
         setEnteredEmail('');
         setIsEmailEmpty(true);
+        setIsEmailValid(false);
         setEnteredPassword('');
         setIsPasswordEmpty(true);
+        setIsPasswordValid(false);
       }
     );
     return setIsSubmittedToFalseWhenScreenRenders;
@@ -109,7 +111,7 @@ export default function LoginForm({ navigation }: NavigationProps) {
       } catch (error) {
         Alert.alert(
           'Authentication failed!',
-          'Could not login, please check your email and password or try again later.'
+          'Invalid email or password. Check your inputs.'
         );
       }
     }

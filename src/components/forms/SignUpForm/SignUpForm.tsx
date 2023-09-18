@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Alert, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
@@ -8,7 +8,6 @@ import ActionRouteButton from '../../ActionRouteButton/ActionRouteButton';
 import UserInput from '../../UserInput/UserInput';
 import { createUser } from '../../../util/auth';
 import { storeUserName } from '../../../util/userData';
-import { AuthContext } from '../../../context/auth-context';
 import LoadingOverlay from '../../LoadingOverlay/LoadingOverlay';
 import {
   nameValidation,
@@ -41,8 +40,6 @@ export default function SignUpForm({ navigation }: NavigationProps) {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [isDoingRequest, setIsDoingRequest] = useState(false);
-
-  const authContext = useContext(AuthContext);
 
   useEffect(() => {
     const setIsSubmittedToFalseWhenScreenRenders = navigation.addListener(
@@ -125,12 +122,12 @@ export default function SignUpForm({ navigation }: NavigationProps) {
       try {
         const { token, uid } = await createUser(enteredEmail, enteredPassword);
         await storeUserName({ name: enteredName, uid: uid });
-        authContext.authenticate(token, enteredName);
+        navigation.navigate('Login');
       } catch (error) {
         console.log(error);
         Alert.alert(
           'Authentication failed!',
-          'Could not create user, please check your inputs or try again later.'
+          'Could not create user, please check your inputs.'
         );
       }
     }

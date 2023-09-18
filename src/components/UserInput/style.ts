@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
     borderColor: Colors.fail,
   },
   labelText: {
+    display: 'none',
     marginTop: 4,
     fontFamily: 'Roboto-Regular400',
     color: Colors.gray,
@@ -24,7 +25,7 @@ export const styles = StyleSheet.create({
   innerContainer: {
     flex: 1,
     flexDirection: 'row',
-    marginTop: 4,
+    marginTop: 22,
   },
   innerText: {
     flex: 1,
@@ -38,5 +39,11 @@ export const styles = StyleSheet.create({
   errorMessageContainer: {
     alignItems: 'center',
     marginBottom: 4,
+  },
+  notEmptyInputLabel: {
+    display: 'flex',
+  },
+  notEmptyInputInnerContainer: {
+    marginTop: 2,
   },
 });

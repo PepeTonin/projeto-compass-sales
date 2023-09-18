@@ -1,3 +1,4 @@
+import {  } from 'react';
 import { TextInput, View, Text } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -24,6 +25,7 @@ export default function UserInput({
   isEmpty,
   isSubmitted,
 }: Props) {
+
   return (
     <View
       style={[
@@ -31,8 +33,8 @@ export default function UserInput({
         isSubmitted && !isValid && styles.isInvalidInputContainer,
       ]}
     >
-      <Text style={styles.labelText}>{placeholder}</Text>
-      <View style={styles.innerContainer}>
+      <Text style={[styles.labelText, !isEmpty && styles.notEmptyInputLabel]}>{placeholder}</Text>
+      <View style={[styles.innerContainer, !isEmpty && styles.notEmptyInputInnerContainer]}>
         <TextInput
           style={styles.innerText}
           placeholder={placeholder}

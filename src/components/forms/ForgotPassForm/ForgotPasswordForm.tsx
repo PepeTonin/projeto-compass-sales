@@ -39,7 +39,7 @@ export default function ForgotPasswordForm({ navigation }: NavigationProps) {
       } catch (error) {
         Alert.alert(
           'Reset password failed!',
-          'Could not reset the password, please check your email or try again later.'
+          'Email not found. Check your input.'
         );
       }
     }

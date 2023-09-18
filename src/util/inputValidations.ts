@@ -1,5 +1,5 @@
 export function nameValidation(enteredName: string) {
-  if (enteredName.length < 4) {
+  if (enteredName.length < 3) {
     return false;
   }
   return true;
